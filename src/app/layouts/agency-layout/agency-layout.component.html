@@ -1,1 +1,11 @@
-<p>agency-layout works!</p>
+<div class="grid grid-cols-8">
+    <!-- Sidebar Column -->
+    <div class="col-span-1 h-full">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <!-- Main Content Column -->
+    <div class="col-span-7 bg-gray-400 h-full">
+        <router-outlet></router-outlet>
+    </div>
+</div>

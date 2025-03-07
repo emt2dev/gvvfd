@@ -1,0 +1,46 @@
+<div class="bg-gray-900 text-white p-4 shadow-lg">
+  <div class="flex items-center justify-between px-5 gap-4 max-h-96 ">
+    <!-- Left Side: Radio Knob -->
+    <div class="flex items-center space-x-4 hidden md:block">
+      <!-- Outer Ring (Radio Knob) -->
+      <div class="relative">
+        <div class="bg-[#A7A99A] p-3 rounded-full w-16 h-16 flex items-center justify-center shadow-xl">
+          <!-- Inner Dial with Rotation Effect -->
+          <div id="dial" class="bg-[#6E6E4A] rounded-full w-12 h-12 relative flex items-center justify-center transition-transform duration-300 ease-in-out">
+            <div class="border-4 border-[#8D8E6A] rounded-full w-8 h-8 mx-auto"></div>
+            <!-- Dial Pointer (Indicator) -->
+            <div id="pointer" class="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-4 bg-black rounded-full mt-2"></div>
+          </div>
+        </div>
+        <!-- Channel Frequency (this can be dynamic with JS) -->
+        <p id="frequency" class="text-center text-black px-4 mt-2 bg-[#6E6E4A]">141.80</p>
+      </div>
+    </div>
+
+    <!-- Call List Section in the middle -->
+    <div class="flex-1 overflow-y-auto px-5 mb-4 gap-4 mt-10 max-h-96 w-full">
+      <h4 class="block md:hidden">Scanner</h4>
+      <!-- Loop through the data and render individual call components -->
+      @for (call of rawData; track call.id) {
+        <app-mdt-call [callData]="call"></app-mdt-call>
+      }
+    </div>
+
+    <!-- Right Side: Number Pad -->
+    <div class="bg-[#B4C3A1] p-3 rounded-lg shadow-xl hidden md:block">
+      <div class="grid grid-cols-3 gap-2">
+        <button class="bg-gray-200 rounded-lg p-3 text-black">1</button>
+        <button class="bg-gray-200 rounded-lg p-3 text-black">2</button>
+        <button class="bg-gray-200 rounded-lg p-3 text-black">3</button>
+        <button class="bg-gray-200 rounded-lg p-3 text-black">4</button>
+        <button class="bg-gray-200 rounded-lg p-3 text-black">5</button>
+        <button class="bg-gray-200 rounded-lg p-3 text-black">6</button>
+        <button class="bg-gray-200 rounded-lg p-3 text-black">7</button>
+        <button class="bg-gray-200 rounded-lg p-3 text-black">8</button>
+        <button class="bg-gray-200 rounded-lg p-3 text-black">9</button>
+        <button class="bg-gray-200 rounded-lg p-3 text-black">0</button>
+      </div>
+    </div>
+  </div>
+  <h1 class="mt-5 text-center hidden md:block">Manufactured by Candyroll Tech, LLC</h1>
+</div>

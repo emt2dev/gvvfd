@@ -1,1 +1,33 @@
-<p>sidebar works!</p>
+<div class="relative">
+  <!-- Hamburger Icon -->
+  <div class="block lg:hidden">
+    <button (click)="toggleMenu()" class="text-3xl">
+      &#9776;
+    </button>
+  </div>
+
+  <!-- Menu -->
+  <ul [ngClass]="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="menu bg-base-200 rounded-box w-full h-[100%] items-left gap-4 ml-0 pr-2 lg:block lg:w-auto">
+    <li>
+      <a routerLink="/agency/dashboard" routerLinkActive="bg-primary text-white">Dashboard</a>
+    </li>
+    <li>
+      <a routerLink="/agency/mdt" routerLinkActive="bg-primary text-white">Dispatcher</a>
+    </li>
+    <li>
+      <a routerLink="/agency/shifts" routerLinkActive="bg-primary text-white">Shifts</a>
+    </li>
+    <li>
+      <a routerLink="/agency/call-history" routerLinkActive="bg-primary text-white">Call History</a>
+    </li>
+    <li>
+      <a routerLink="/agency/roster" routerLinkActive="bg-primary text-white">Roster</a>
+    </li>
+    <li>
+      <a routerLink="/agency/users" routerLinkActive="bg-primary text-white">Users</a>
+    </li>
+    <li>
+      <a routerLink="/agency/incident-reports" routerLinkActive="bg-primary text-white">Incident Reports</a>
+    </li>
+  </ul>
+</div>

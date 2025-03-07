@@ -1,3 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 @plugin "daisyui";
+
+@font-face {
+    font-family: 'DS-Digital';
+    src: url('assets/fonts/ds_digital/DS-DIGI.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
