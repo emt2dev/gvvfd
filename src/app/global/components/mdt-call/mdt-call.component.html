@@ -1,52 +1,85 @@
-<!-- Emergency Call Section -->
+<!-- Child Component HTML -->
 <div class="bg-[#B3BAAA] p-6 rounded-lg shadow-2xl border border-gray-700 text-black my-6">
-  
-  <p class="font-semibold text-center">
+  <p class="text-center">
     STATUS:
     <span [ngClass]="{
       'text-green-800': radioData.active,
       'text-red-500': !radioData.active,
-      'blink': radioData.active
-    }" class="font-mono bg-[#B4C3A1]">
+      'blink': radioData.active,
+      'font-semibold': backLight,
+      'bg-[#F28C28]': backLight,
+      'bg-[#B4C3A1]': !backLight
+    }" class="font-mono">
       {{ radioData.active ? 'Active' : 'Complete' }}
     </span>
   </p>
+  
   <!-- Flex container to align type and location side by side -->
   <div class="flex flex-col sm:flex-row justify-between gap-4 mt-6 px-6">
-    <p class="text-lg font-mono px-3 bg-[#B4C3A1]">{{ radioData.type }}</p>
-    <p class="text-lg font-mono bg-[#B4C3A1]">{{ radioData.location }}</p>
+    <p [ngClass]="{
+      'font-semibold': backLight,
+      'bg-[#F28C28]': backLight,
+      'bg-[#B4C3A1]': !backLight
+    }" class="text-lg font-mono px-3">
+      {{ radioData.type }}
+    </p>
+    <p [ngClass]="{
+      'font-semibold': backLight,
+      'bg-[#F28C28]': backLight,
+      'bg-[#B4C3A1]': !backLight
+    }" class="text-lg font-mono">
+      {{ radioData.location }}
+    </p>
   </div>
 
   <!-- CAD Display with overflow handling -->
-  <div class="overflow-x-auto mt-6 px-6 bg-[#B4C3A1]">
-    <p class="text-lg font-mono break-words md:whitespace-nowrap text-black py-1 px-2 rounded-md shadow-lg">
+  <div class="overflow-x-auto mt-6 px-6">
+    <p [ngClass]="{
+      'font-semibold': backLight,
+      'bg-[#F28C28]': backLight,
+      'bg-[#B4C3A1]': !backLight
+    }" class="text-lg font-mono break-words md:whitespace-nowrap text-black py-1 px-2 rounded-md shadow-lg">
       {{ radioData.cadDisplay }}
     </p>
   </div>
 
   <!-- Status Section -->
   <div class="mt-4 px-2 text-center">
-    <p class="font-semibold ">
+    <p>
       DISPATCHED:
-      <span class="font-mono bg-[#B4C3A1] ">
+      <span [ngClass]="{
+        'font-semibold': backLight,
+        'bg-[#F28C28]': backLight,
+        'bg-[#B4C3A1]': !backLight
+      }" class="font-mono">
         {{ radioData.dispatchedOn }}
       </span>
     </p>
     
-    <p class="font-semibold ">
+    <p>
       COMMAND:
-      <span class="font-mono bg-[#B4C3A1] ">
+      <span [ngClass]="{
+        'font-semibold': backLight,
+        'bg-[#F28C28]': backLight,
+        'bg-[#B4C3A1]': !backLight
+      }" class="font-mono">
         {{ radioData.command }}
       </span>
     </p>
   </div>
 
-  <!-- Call Assignments Section --><div class="mt-8 bg-[#B4C3A1]">
-  <ul class="list-none mt-6 px-6 flex flex-wrap">
-    <li *ngFor="let crew of radioData.callAssignments; trackBy: trackById" class="text-center text-blue-200 text-lg font-mono flex items-center mr-6 mb-4">
-      <p class="text-black font-bold">{{ crew.vehicle }}</p>
-    </li>
-  </ul>
-</div>
+  <!-- Call Assignments Section -->
+  <div class="mt-8" [ngClass]="{
+      'bg-[#F28C28]': backLight,
+      'bg-[#B4C3A1]': !backLight
+    }">
+    <ul class="list-none mt-6 px-6 flex flex-wrap">
+      <li *ngFor="let crew of radioData.callAssignments; trackBy: trackById" class="text-center justify-center items-center text-blue-200 text-lg font-mono flex  mr-6 mb-4">
+        <p [ngClass]="{
+          'font-semibold': backLight
+        }" class="text-black">{{ crew.vehicle }}</p>
+      </li>
+    </ul>
+  </div>
 
 </div>

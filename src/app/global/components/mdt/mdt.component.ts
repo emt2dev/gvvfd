@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MdtCallComponent } from '../mdt-call/mdt-call.component';
+import { SettingsService } from '../../../services/settings.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-mdt',
@@ -13,17 +15,20 @@ import { MdtCallComponent } from '../mdt-call/mdt-call.component';
   }`
 })
 export class MdtComponent {
+  settingsService = inject(SettingsService);
   apiData: any;
   rawData: any;
+  toggleBacklight: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);  // Use BehaviorSubject
+
   ngOnInit(): void {
     this.apiData = signal<any[]>([
       {
         id: new Date(),
         type: 'CommercialFire'.replace(/([a-z])([A-Z])/g, '$1 $2'),
-        location: `Gran Vista FD - Roblox - YoDog's house`,
+        location: `DONUT SHOP`,
         command: `Zayyy`,
         dispatchedOn: new Date().toISOString().split("T")[0],
-        cadDisplay: `ENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE AT YODOG'S HOUSEENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE AT YODOG'S HOUSEENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE AT YODOG'S HOUSEENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE AT YODOG'S HOUSEENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE AT YODOG'S HOUSEENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE AT YODOG'S HOUSE`,
+        cadDisplay: `ENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE AT DONUT SHOP`,
         active: true,
         callAssignments: [
           {
@@ -41,10 +46,10 @@ export class MdtComponent {
       {
         id: new Date(),
         type: 'CommercialFire'.replace(/([a-z])([A-Z])/g, '$1 $2'),
-        location: `Yodog's house`,
+        location: `MAIN STREET`,
         command: `Zayyy`,
         dispatchedOn: new Date().toISOString().split("T")[0],
-        cadDisplay: `ENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE AT YODOG'S HOUSEENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE AT YODOG'S HOUSEENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE AT YODOG'S HOUSEENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE AT YODOG'S HOUSEENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE AT YODOG'S HOUSEENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE AT YODOG'S HOUSE`,
+        cadDisplay: `ENGINE RESCUE 4 RESPOND TO MVA AT MAIN STREET`,
         active: false,
         callAssignments: [
           {
@@ -60,5 +65,10 @@ export class MdtComponent {
     ]);
 
     this.rawData = this.apiData();
+  }
+
+  backlightToggle() {
+    console.log(this.toggleBacklight.value);  // Log current value
+    this.toggleBacklight.next(!this.toggleBacklight.value);  // Update BehaviorSubject value
   }
 }

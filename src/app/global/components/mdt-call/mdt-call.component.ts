@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal, SimpleChanges } from '@angular/core';
+import { SettingsService } from '../../../services/settings.service';
 
 
 interface CallAssignment {
@@ -62,19 +63,34 @@ interface MdtCall {
 p {
 font-family: "DS-Digital";
 }
-`
+`,
+
+changeDetection: ChangeDetectionStrategy.OnPush 
 
 })
 
 export class MdtCallComponent {
+  settingsService = inject(SettingsService);
   callData = input.required<MdtCall>();
   radioData = {} as MdtCall;
-  // callAssignments = CallAssignment[];
-  
-  ngOnInit(): void {
+  lightSetting = input.required<boolean>();
+  backLight = false;
+  constructor() {
+  }
 
+  ngOnInit(): void {
+    this.backLight = this.lightSetting();
     this.radioData = this.callData();
     // this.callAssignments = this.radioData.callAssignments;
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['lightSetting']) {
+      this.backLight = this.lightSetting();  // Update the backlight based on the new lightSetting value
+    }
+
+    if (changes['callData']) {
+      this.radioData = this.callData();
+    }
   }
 
   trackById(index: number, item: CallAssignment): string {

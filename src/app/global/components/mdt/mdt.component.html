@@ -1,4 +1,4 @@
-<div class="bg-gray-900 text-white p-4 shadow-lg">
+<div class="bg-gray-700 text-white p-4 shadow-lg">
   <div class="flex items-center justify-between px-5 gap-4 max-h-96 ">
     <!-- Left Side: Radio Knob -->
     <div class="flex items-center space-x-4 hidden md:block">
@@ -12,8 +12,13 @@
             <div id="pointer" class="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-4 bg-black rounded-full mt-2"></div>
           </div>
         </div>
-        <!-- Channel Frequency (this can be dynamic with JS) -->
-        <p id="frequency" class="text-center text-black px-4 mt-2 bg-[#6E6E4A]">141.80</p>
+
+      <!-- Channel Frequency (this can be dynamic with JS) -->   
+        <p id="frequency" class="text-center text-black px-4 mt-2 bg-[#6E6E4A]">FIRE DISPATCH</p>
+        
+        <button (click)="backlightToggle()" class="px-4 py-2 my-4 bg-[#8D8E6A] cursor-pointer text-black rounded">
+          Backlight
+        </button>         
       </div>
     </div>
 
@@ -22,7 +27,7 @@
       <h4 class="block md:hidden">Scanner</h4>
       <!-- Loop through the data and render individual call components -->
       @for (call of rawData; track call.id) {
-        <app-mdt-call [callData]="call"></app-mdt-call>
+        <app-mdt-call [callData]="call" [lightSetting]="(toggleBacklight | async) || false"></app-mdt-call>
       }
     </div>
 
